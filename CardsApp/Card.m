@@ -18,8 +18,8 @@
         _info = [cardJson valueForKey:@"info"];
         _imageName = [cardJson valueForKey:@"imageName"];
         
-        NSInteger count = (NSInteger)[cardJson valueForKey:@"likesCount"];
-        _likesCount = [NSNumber numberWithInteger:count];
+        int count = [[cardJson valueForKey:@"likesCount"] intValue];
+        _likesCount = [NSNumber numberWithInt:count];
         
         NSString *createdDateStr = [cardJson valueForKey:@"created"];
         NSString *updateDateStr = [cardJson valueForKey:@"updated"];

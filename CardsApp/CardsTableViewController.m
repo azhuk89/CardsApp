@@ -11,10 +11,12 @@
 #import "Card.h"
 #import "Constants.h"
 #import "CardsDataManager.h"
+#import "CardDetailsViewController.h"
 
 @interface CardsTableViewController ()
 
 @property (nonatomic) NSMutableArray *cards;
+@property (nonatomic) Card *selectedCard;
 
 @end
 
@@ -54,10 +56,15 @@
     
     Card *card = [self.cards objectAtIndex:indexPath.row];
     cell.nameLabel.text = card.name;
+    cell.likeLabel.text = card.likesCount>0 ? @"I like!" : @"I don ot like!";
     
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.selectedCard = [self.cards objectAtIndex:indexPath.row];
+    [self performSegueWithIdentifier:@"detailsSegue" sender:self];
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -93,15 +100,16 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"detailsSegue"]) {
+        CardDetailsViewController *destinationVC = [segue destinationViewController];
+        destinationVC.card = self.selectedCard;
+    }
 }
-*/
+
 
 #pragma mark - load data logic
 
