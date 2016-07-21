@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		042AE0D71D40C98E0077394D /* CardsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042AE0D61D40C98E0077394D /* CardsTableViewController.m */; };
+		042AE0DC1D40C9F10077394D /* CardDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042AE0DB1D40C9F10077394D /* CardDetailsViewController.m */; };
+		042AE0DF1D40CA130077394D /* CardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042AE0DE1D40CA130077394D /* CardTableViewCell.m */; };
+		042AE0E31D40D9940077394D /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 042AE0E21D40D9940077394D /* Card.m */; };
+		042AE0E81D40F0FC0077394D /* CardsDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 042AE0E71D40F0FC0077394D /* CardsDataManager.m */; };
 		04B2AFB11D3FC1E600B0E26C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B2AFB01D3FC1E600B0E26C /* main.m */; };
 		04B2AFB41D3FC1E600B0E26C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B2AFB31D3FC1E600B0E26C /* AppDelegate.m */; };
 		04B2AFB71D3FC1E700B0E26C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B2AFB61D3FC1E700B0E26C /* ViewController.m */; };
@@ -17,6 +22,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		042AE0D51D40C98E0077394D /* CardsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardsTableViewController.h; sourceTree = "<group>"; };
+		042AE0D61D40C98E0077394D /* CardsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardsTableViewController.m; sourceTree = "<group>"; };
+		042AE0DA1D40C9F10077394D /* CardDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardDetailsViewController.h; sourceTree = "<group>"; };
+		042AE0DB1D40C9F10077394D /* CardDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardDetailsViewController.m; sourceTree = "<group>"; };
+		042AE0DD1D40CA130077394D /* CardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTableViewCell.h; sourceTree = "<group>"; };
+		042AE0DE1D40CA130077394D /* CardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTableViewCell.m; sourceTree = "<group>"; };
+		042AE0E01D40CE240077394D /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		042AE0E21D40D9940077394D /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
+		042AE0E41D40D9A30077394D /* Card.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		042AE0E61D40F0FC0077394D /* CardsDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardsDataManager.h; sourceTree = "<group>"; };
+		042AE0E71D40F0FC0077394D /* CardsDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardsDataManager.m; sourceTree = "<group>"; };
 		04B2AFAC1D3FC1E400B0E26C /* CardsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04B2AFB01D3FC1E600B0E26C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04B2AFB21D3FC1E600B0E26C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -44,6 +60,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		042AE0D81D40C9970077394D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				042AE0D91D40C9C70077394D /* Cells */,
+				042AE0D51D40C98E0077394D /* CardsTableViewController.h */,
+				042AE0D61D40C98E0077394D /* CardsTableViewController.m */,
+				042AE0DA1D40C9F10077394D /* CardDetailsViewController.h */,
+				042AE0DB1D40C9F10077394D /* CardDetailsViewController.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		042AE0D91D40C9C70077394D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				042AE0DD1D40CA130077394D /* CardTableViewCell.h */,
+				042AE0DE1D40CA130077394D /* CardTableViewCell.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		042AE0E11D40D95D0077394D /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				042AE0E21D40D9940077394D /* Card.m */,
+				042AE0E41D40D9A30077394D /* Card.h */,
+			);
+			name = Entities;
+			sourceTree = "<group>";
+		};
+		042AE0E51D40F0BE0077394D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				042AE0E61D40F0FC0077394D /* CardsDataManager.h */,
+				042AE0E71D40F0FC0077394D /* CardsDataManager.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		04B2AFA31D3FC1E100B0E26C = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +120,9 @@
 		04B2AFAE1D3FC1E600B0E26C /* CardsApp */ = {
 			isa = PBXGroup;
 			children = (
+				042AE0E51D40F0BE0077394D /* Utils */,
+				042AE0E11D40D95D0077394D /* Entities */,
+				042AE0D81D40C9970077394D /* Views */,
 				04B2AFB21D3FC1E600B0E26C /* AppDelegate.h */,
 				04B2AFB31D3FC1E600B0E26C /* AppDelegate.m */,
 				04B2AFB51D3FC1E700B0E26C /* ViewController.h */,
@@ -82,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				04B2AFB01D3FC1E600B0E26C /* main.m */,
+				042AE0E01D40CE240077394D /* Constants.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -225,8 +284,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				04B2AFB71D3FC1E700B0E26C /* ViewController.m in Sources */,
+				042AE0D71D40C98E0077394D /* CardsTableViewController.m in Sources */,
+				042AE0DC1D40C9F10077394D /* CardDetailsViewController.m in Sources */,
+				042AE0DF1D40CA130077394D /* CardTableViewCell.m in Sources */,
 				04B2AFB41D3FC1E600B0E26C /* AppDelegate.m in Sources */,
+				042AE0E31D40D9940077394D /* Card.m in Sources */,
 				04B2AFB11D3FC1E600B0E26C /* main.m in Sources */,
+				042AE0E81D40F0FC0077394D /* CardsDataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
