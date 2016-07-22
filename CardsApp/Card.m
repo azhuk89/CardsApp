@@ -21,6 +21,13 @@
         int count = [[cardJson valueForKey:@"likesCount"] intValue];
         _likesCount = [NSNumber numberWithInt:count];
         
+        NSString* likeUUIDListString = [cardJson valueForKey:@"likeUUIDList"];
+        if (![likeUUIDListString isEqual:[NSNull null]]) {
+            _likeUUIDList = [[likeUUIDListString componentsSeparatedByString:@","] mutableCopy];
+        } else {
+            _likeUUIDList = [NSMutableArray new];
+        }
+        
         NSString *createdDateStr = [cardJson valueForKey:@"created"];
         NSString *updateDateStr = [cardJson valueForKey:@"updated"];
         _created = [NSDate dateWithTimeIntervalSince1970:createdDateStr.doubleValue / 1000];

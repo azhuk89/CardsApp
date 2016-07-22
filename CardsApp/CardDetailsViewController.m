@@ -7,6 +7,8 @@
 //
 
 #import "CardDetailsViewController.h"
+#import "CardsDataManager.h"
+#import <UIImageView+AFNetworking.h>
 
 @interface CardDetailsViewController ()
 
@@ -20,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
+@property (nonatomic) NSString *UUID;
+
 @end
 
 @implementation CardDetailsViewController
@@ -28,8 +32,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.nameLabel.text = self.card.name;
-    self.likesLabel.text = [NSString stringWithFormat:@"%@", self.card.likesCount];
+    [self getUUID];
+    [self showCard];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,5 +50,30 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void)getUUID {
+    self.UUID = [[NSUserDefaults standardUserDefaults] valueForKey:@"appUUID"];
+    if (!self.UUID) {
+        self.UUID = [[NSUUID UUID] UUIDString];
+        [[NSUserDefaults standardUserDefaults] setValue:self.UUID forKey:@"appUUID"];
+    }
+    NSLog(@"%@", self.UUID);
+}
+
+-(void)showCard {
+    NSString *imageURLString = [kBackendlessRestApiDownloadFileURL stringByAppendingString:self.card.imageName];
+    [self.cardImageVIew setImageWithURL:[NSURL URLWithString:imageURLString]];
+    
+    [self.likeButton setTitle:[self.card.likeUUIDList containsObject:self.UUID] ? @"Dislike" : @"Like" forState:UIControlStateNormal];
+    self.nameLabel.text = self.card.name;
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    self.dateLabel.text = [dateFormatter stringFromDate:self.card.created];
+    
+    self.authorLabel.text = self.card.author;
+    self.descLabel.text = self.card.info;
+    self.likesLabel.text = [NSString stringWithFormat:@"%@", self.card.likesCount];
+}
 
 @end

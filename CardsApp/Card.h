@@ -15,6 +15,7 @@
 @property (nonatomic) NSString *info;
 @property (nonatomic) NSString *imageName;
 @property (nonatomic) NSNumber *likesCount;
+@property (nonatomic) NSMutableArray *likeUUIDList;
 
 //backendless properties
 @property (nonatomic) NSDate *created;

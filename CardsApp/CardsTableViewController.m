@@ -31,7 +31,6 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.cards = [NSMutableArray new];
     [self loadCards];
 }
 
@@ -56,7 +55,7 @@
     
     Card *card = [self.cards objectAtIndex:indexPath.row];
     cell.nameLabel.text = card.name;
-    cell.likeLabel.text = card.likesCount>0 ? @"I like!" : @"I don ot like!";
+    cell.likeLabel.text = card.likesCount>0 ? @"I like!" : @"I do not like!";
     
     return cell;
 }
@@ -120,6 +119,7 @@
                 self.cards = [NSMutableArray arrayWithArray:cards];
                 [self.tableView reloadData];
             } else {
+                self.cards = [NSMutableArray new];
                 [self showAlertWithTitle:@"Error" andMessage:@"Load Cards Error"];
             }
         });

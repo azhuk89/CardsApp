@@ -41,6 +41,7 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Load Cards Error: %@", error);
         if (completion) return completion(nil);
-    }];}
+    }];
+}
 
 @end
