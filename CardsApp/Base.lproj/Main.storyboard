@@ -138,8 +138,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BnZ-hm-NZG">
-                                <rect key="frame" x="145" y="153" width="30" height="30"/>
-                                <state key="normal" title="Like"/>
+                                <rect key="frame" x="137" y="153" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="likeButtonTouchUpInside:" destination="ODl-HH-KuZ" eventType="touchUpInside" id="z42-2f-PJ8"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -158,7 +161,13 @@
                             <constraint firstItem="BnZ-hm-NZG" firstAttribute="centerX" secondItem="hdY-hK-s2m" secondAttribute="centerX" id="yuj-Sl-ghS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="LTP-0b-dm6"/>
+                    <navigationItem key="navigationItem" id="LTP-0b-dm6">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="l2X-gu-5ga">
+                            <connections>
+                                <action selector="saveButtonTouched:" destination="ODl-HH-KuZ" id="OgV-kM-88I"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="authorLabel" destination="xE6-On-fOF" id="dE4-dk-2g2"/>
                         <outlet property="cardImageVIew" destination="hdY-hK-s2m" id="Syz-Tl-nlt"/>

@@ -9,8 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "Card.h"
 
+@class CardDetailsViewController;
+
+@protocol CardDetailsViewControllerDelegate <NSObject>
+
+-(void)cardDetailsViewControllerDidChangeLikeStatus;
+
+@end
+
 @interface CardDetailsViewController : UIViewController
 
 @property (nonatomic) Card *card;
+@property (weak, nonatomic) id<CardDetailsViewControllerDelegate> delegate;
 
 @end

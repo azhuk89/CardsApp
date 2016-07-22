@@ -8,7 +8,7 @@
 
 #import "CardDetailsViewController.h"
 #import "CardsDataManager.h"
-#import <UIImageView+AFNetworking.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface CardDetailsViewController ()
 
@@ -52,6 +52,7 @@
 */
 
 -(void)getUUID {
+    if (self.UUID) return;
     self.UUID = [[NSUserDefaults standardUserDefaults] valueForKey:@"appUUID"];
     if (!self.UUID) {
         self.UUID = [[NSUUID UUID] UUIDString];
@@ -62,7 +63,7 @@
 
 -(void)showCard {
     NSString *imageURLString = [kBackendlessRestApiDownloadFileURL stringByAppendingString:self.card.imageName];
-    [self.cardImageVIew setImageWithURL:[NSURL URLWithString:imageURLString]];
+    [self.cardImageVIew sd_setImageWithURL:[NSURL URLWithString:imageURLString]];
     
     [self.likeButton setTitle:[self.card.likeUUIDList containsObject:self.UUID] ? @"Dislike" : @"Like" forState:UIControlStateNormal];
     self.nameLabel.text = self.card.name;
@@ -74,6 +75,19 @@
     self.authorLabel.text = self.card.author;
     self.descLabel.text = self.card.info;
     self.likesLabel.text = [NSString stringWithFormat:@"%@", self.card.likesCount];
+}
+
+- (IBAction)likeButtonTouchUpInside:(id)sender {
+    if ([self.likeButton.currentTitle isEqualToString:@"Like"]) {
+        [self.likeButton setTitle:@"Dislike" forState:UIControlStateNormal];
+        [self.card.likeUUIDList addObject:self.UUID];
+    } else {
+        [self.likeButton setTitle:@"Like" forState:UIControlStateNormal];
+        [self.card.likeUUIDList removeObject:self.UUID];
+    }
+    if ([self.delegate respondsToSelector:@selector(cardDetailsViewControllerDidChangeLikeStatus)]) {
+        [self.delegate cardDetailsViewControllerDidChangeLikeStatus];
+    }
 }
 
 @end

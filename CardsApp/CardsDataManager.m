@@ -44,4 +44,8 @@
     }];
 }
 
+-(void)sendCardDataToServer:(NSString*)cardJSON completion:(void (^)(NSString* error))completion {
+    
+}
+
 @end

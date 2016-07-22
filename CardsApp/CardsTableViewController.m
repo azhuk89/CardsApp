@@ -13,7 +13,7 @@
 #import "CardsDataManager.h"
 #import "CardDetailsViewController.h"
 
-@interface CardsTableViewController ()
+@interface CardsTableViewController ()<CardDetailsViewControllerDelegate>
 
 @property (nonatomic) NSMutableArray *cards;
 @property (nonatomic) Card *selectedCard;
@@ -55,7 +55,9 @@
     
     Card *card = [self.cards objectAtIndex:indexPath.row];
     cell.nameLabel.text = card.name;
-    cell.likeLabel.text = card.likesCount>0 ? @"I like!" : @"I do not like!";
+    
+    NSString *UUID = [[NSUserDefaults standardUserDefaults] valueForKey:@"appUUID"];
+    cell.likeLabel.text = UUID && [card.likeUUIDList containsObject:UUID] ? @"I like!" : @"I do not like!";
     
     return cell;
 }
@@ -106,6 +108,7 @@
     if ([segue.identifier isEqualToString:@"detailsSegue"]) {
         CardDetailsViewController *destinationVC = [segue destinationViewController];
         destinationVC.card = self.selectedCard;
+        destinationVC.delegate = self;
     }
 }
 
@@ -129,6 +132,12 @@
 -(void)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
     [alert show];
+}
+
+#pragma mark - CardDetailsViewControllerDelegate
+
+-(void)cardDetailsViewController:(CardDetailsViewController *)vc didChangeLikeStatus:(BOOL)liked {
+    [self.tableView reloadData];
 }
 
 @end

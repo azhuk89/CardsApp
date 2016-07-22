@@ -18,5 +18,6 @@ static NSString * const kBackendlessAppId = @"C989C2DA-203C-2EA9-FF03-2F777E1A19
 +(CardsDataManager*)sharedManager;
 
 -(void)loadCardsDataWithCompletion:(void (^)(NSMutableArray *cards))completion;
+-(void)sendCardDataToServer:(NSString*)cardJSON completion:(void (^)(NSString* error))completion;
 
 @end

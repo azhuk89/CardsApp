@@ -40,4 +40,13 @@
     return self;
 }
 
+-(NSString*)cardJSON {
+    NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:self.name, @"name", self.author, @"author", self.info, @"info",
+                          self.imageName, @"imageName", self.likesCount, @"likesCount", self.likeUUIDList.description, @"likeUUIDList",
+                          self.created.timeIntervalSince1970*1000, @"created", nil];
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
+    NSString* json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    return json;
+}
+
 @end
