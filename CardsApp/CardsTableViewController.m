@@ -8,10 +8,12 @@
 
 #import "CardsTableViewController.h"
 #import "CardTableViewCell.h"
-#import "Card.h"
-#import "Constants.h"
-#import "CardsDataManager.h"
 #import "CardDetailsViewController.h"
+#import "Card.h"
+
+#import "Constants.h"
+#import "Utils.h"
+#import "CardsDataManager.h"
 
 @interface CardsTableViewController ()<CardDetailsViewControllerDelegate>
 
@@ -116,27 +118,25 @@
 #pragma mark - load data logic
 
 -(void)loadCards {
-    [[CardsDataManager sharedManager] loadCardsDataWithCompletion:^(NSMutableArray *cards) {
+    [[CardsDataManager sharedManager] loadCardsDataWithCompletion:^(BOOL successful, NSArray *cardsJsonArray) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (cards) {
-                self.cards = [NSMutableArray arrayWithArray:cards];
+            if (successful) {
+                self.cards = [NSMutableArray new];
+                for (NSDictionary *json in cardsJsonArray) {
+                    Card *card = [[Card alloc] initWithJSON:json];
+                    [self.cards addObject:card];
+                }
                 [self.tableView reloadData];
             } else {
-                self.cards = [NSMutableArray new];
-                [self showAlertWithTitle:@"Error" andMessage:@"Load Cards Error"];
+                [self presentViewController:[Utils showAlertWithTitle:@"Error" andMessage:@"Load Cards Error"] animated:YES completion:nil];
             }
         });
     }];
 }
 
--(void)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-    [alert show];
-}
-
 #pragma mark - CardDetailsViewControllerDelegate
 
--(void)cardDetailsViewController:(CardDetailsViewController *)vc didChangeLikeStatus:(BOOL)liked {
+-(void)cardDetailsViewControllerDidChangeLikeStatus {
     [self.tableView reloadData];
 }
 

@@ -24,6 +24,6 @@
 @property (nonatomic) NSString *ownerId;
 
 -(id)initWithJSON:(NSDictionary*)cardJson;
--(NSString*)cardJSON;
+-(NSString*)updatedFieldsJSON;
 
 @end

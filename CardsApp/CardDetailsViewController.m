@@ -8,6 +8,7 @@
 
 #import "CardDetailsViewController.h"
 #import "CardsDataManager.h"
+#import "Utils.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface CardDetailsViewController ()
@@ -22,11 +23,17 @@
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *desLabelBottomConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *descViewHeightConstraint;
+
 @property (nonatomic) NSString *UUID;
 
 @end
 
-@implementation CardDetailsViewController
+@implementation CardDetailsViewController {
+    BOOL needMore;
+    BOOL needLike;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -66,6 +73,7 @@
     [self.cardImageVIew sd_setImageWithURL:[NSURL URLWithString:imageURLString]];
     
     [self.likeButton setTitle:[self.card.likeUUIDList containsObject:self.UUID] ? @"Dislike" : @"Like" forState:UIControlStateNormal];
+    needLike = [self.likeButton.currentTitle isEqualToString:@"Like"] ? YES : NO;
     self.nameLabel.text = self.card.name;
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -75,19 +83,49 @@
     self.authorLabel.text = self.card.author;
     self.descLabel.text = self.card.info;
     self.likesLabel.text = [NSString stringWithFormat:@"%@", self.card.likesCount];
+    needMore = YES;
 }
 
 - (IBAction)likeButtonTouchUpInside:(id)sender {
-    if ([self.likeButton.currentTitle isEqualToString:@"Like"]) {
+    if (needLike) {
         [self.likeButton setTitle:@"Dislike" forState:UIControlStateNormal];
         [self.card.likeUUIDList addObject:self.UUID];
+        self.card.likesCount = [NSNumber numberWithInteger:self.card.likesCount.integerValue+1];
+        self.likesLabel.text = [NSString stringWithFormat:@"Likes: %@", self.card.likesCount];
     } else {
         [self.likeButton setTitle:@"Like" forState:UIControlStateNormal];
         [self.card.likeUUIDList removeObject:self.UUID];
+        if (self.card.likesCount.integerValue > 0) {
+            self.card.likesCount = [NSNumber numberWithInteger:self.card.likesCount.integerValue-1];
+            self.likesLabel.text = [NSString stringWithFormat:@"Likes: %@", self.card.likesCount];
+        }
     }
+    needLike = !needLike;
+    
+    [[CardsDataManager sharedManager] sendCardDataToServerWithId:self.card.objectId json:[self.card updatedFieldsJSON] completion:^(BOOL successful, NSString *error) {
+        if (!successful) {
+            [self presentViewController:[Utils showAlertWithTitle:@"Error" andMessage:@"Send Card Error"] animated:YES completion:nil];
+        }
+    }];
+    
     if ([self.delegate respondsToSelector:@selector(cardDetailsViewControllerDidChangeLikeStatus)]) {
         [self.delegate cardDetailsViewControllerDidChangeLikeStatus];
     }
+}
+
+- (IBAction)moreButtonTouchUpInside:(id)sender {
+    if (needMore) {
+        self.descLabel.numberOfLines = 0;
+        self.descViewHeightConstraint.constant = self.descLabel.frame.size.height+55;
+        [self.descLabel sizeToFit];
+        [self.moreButton setTitle:@"Less" forState:UIControlStateNormal];
+    } else {
+        self.descLabel.numberOfLines = 5;
+        [self.descLabel sizeToFit];
+        self.descViewHeightConstraint.constant = self.descLabel.frame.size.height+55;
+        [self.moreButton setTitle:@"More" forState:UIControlStateNormal];
+    }
+    needMore = !needMore;
 }
 
 @end

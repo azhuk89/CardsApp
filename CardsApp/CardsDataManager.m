@@ -21,9 +21,7 @@
     return instance;
 }
 
--(void)loadCardsDataWithCompletion:(void (^)(NSMutableArray *cards))completion {
-    NSMutableArray *loadedCards = [NSMutableArray new];
-    
+-(void)loadCardsDataWithCompletion:(void (^)(BOOL successful, NSArray *cardsJsonArray))completion {
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
     sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
     [sessionManager.requestSerializer setValue:kBackendlessAppId forHTTPHeaderField:@"application-id"];
@@ -33,19 +31,36 @@
         NSLog(@"JSON: %@", responseObject);
         NSDictionary *json = (NSDictionary*)responseObject;
         NSArray *cardsArray = [json valueForKey:@"data"];
-        for (NSDictionary *json in cardsArray) {
-            Card *card = [[Card alloc] initWithJSON:json];
-            [loadedCards addObject:card];
-        }
-        if (completion) return completion(loadedCards);
+        if (completion) return completion(YES, cardsArray);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Load Cards Error: %@", error);
-        if (completion) return completion(nil);
+        if (completion) return completion(NO, nil);
     }];
 }
 
--(void)sendCardDataToServer:(NSString*)cardJSON completion:(void (^)(NSString* error))completion {
+-(void)sendCardDataToServerWithId:(NSString*)cardId json:(NSString*)cardJSON completion:(void (^)(BOOL successful, NSString* error))completion {
+    if (cardId.length == 0 || cardJSON.length == 0) return;
     
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSString *cardURL = [NSString stringWithFormat:@"%@/%@", kBackendlessRestApiDataURL, cardId];
+    
+    NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"PUT" URLString:cardURL parameters:0 error:nil];
+    request.timeoutInterval = 30;
+    [request setValue:kBackendlessAppId forHTTPHeaderField:@"application-id"];
+    [request setValue:kBackendlessRestApiSecretKey forHTTPHeaderField:@"secret-key"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setHTTPBody:[cardJSON dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [[manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if (!error) {
+            NSLog(@"Successful load: %@", responseObject);
+            if (completion) return completion(YES, nil);
+        } else {
+            NSLog(@"Send Card Error: %@", error);
+            if (completion) return completion(NO, error.localizedDescription);
+        }
+    }] resume];
 }
 
 @end

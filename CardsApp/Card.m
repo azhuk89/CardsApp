@@ -40,13 +40,22 @@
     return self;
 }
 
--(NSString*)cardJSON {
-    NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:self.name, @"name", self.author, @"author", self.info, @"info",
-                          self.imageName, @"imageName", self.likesCount, @"likesCount", self.likeUUIDList.description, @"likeUUIDList",
-                          self.created.timeIntervalSince1970*1000, @"created", nil];
-    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
-    NSString* json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    return json;
+-(NSString*)updatedFieldsJSON {
+    NSMutableString *likesString = [NSMutableString new];
+    for (NSString *item in self.likeUUIDList) {
+        [likesString appendFormat:@"%@,", item];
+    }
+    [likesString deleteCharactersInRange:NSMakeRange(likesString.length-1, 1)];
+    
+    NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:self.likesCount, @"likesCount", likesString, @"likeUUIDList", nil];
+    NSError *error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
+    if (!error) {
+        NSString* json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        return json;
+    } else {
+        return @"";
+    }
 }
 
 @end

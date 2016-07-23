@@ -103,6 +103,9 @@
                                         <rect key="frame" x="105" y="138" width="31" height="29"/>
                                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
                                         <state key="normal" title="more"/>
+                                        <connections>
+                                            <action selector="moreButtonTouchUpInside:" destination="ODl-HH-KuZ" eventType="touchUpInside" id="CzI-co-iFJ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -161,19 +164,15 @@
                             <constraint firstItem="BnZ-hm-NZG" firstAttribute="centerX" secondItem="hdY-hK-s2m" secondAttribute="centerX" id="yuj-Sl-ghS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="LTP-0b-dm6">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="l2X-gu-5ga">
-                            <connections>
-                                <action selector="saveButtonTouched:" destination="ODl-HH-KuZ" id="OgV-kM-88I"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="LTP-0b-dm6"/>
                     <connections>
                         <outlet property="authorLabel" destination="xE6-On-fOF" id="dE4-dk-2g2"/>
                         <outlet property="cardImageVIew" destination="hdY-hK-s2m" id="Syz-Tl-nlt"/>
                         <outlet property="dateLabel" destination="0EB-fR-oln" id="tjp-tv-cdP"/>
+                        <outlet property="desLabelBottomConstraint" destination="bWF-EU-ab7" id="RVA-wq-YfZ"/>
                         <outlet property="descLabel" destination="7HL-PU-reY" id="KnS-Sd-oa0"/>
                         <outlet property="descView" destination="1zE-LH-AHI" id="ht6-BY-i0b"/>
+                        <outlet property="descViewHeightConstraint" destination="Q3o-SA-1P6" id="rHw-uP-tyw"/>
                         <outlet property="likeButton" destination="BnZ-hm-NZG" id="H5T-av-xTK"/>
                         <outlet property="likesLabel" destination="ag8-ux-4WP" id="qDv-7s-rTu"/>
                         <outlet property="moreButton" destination="7ql-Q3-znt" id="fZg-1I-Ilh"/>
