@@ -45,7 +45,9 @@
     for (NSString *item in self.likeUUIDList) {
         [likesString appendFormat:@"%@,", item];
     }
-    [likesString deleteCharactersInRange:NSMakeRange(likesString.length-1, 1)];
+    if (likesString.length > 0) {
+        [likesString deleteCharactersInRange:NSMakeRange(likesString.length-1, 1)];
+    }
     
     NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:self.likesCount, @"likesCount", likesString, @"likeUUIDList", nil];
     NSError *error = nil;

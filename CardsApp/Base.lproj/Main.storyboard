@@ -86,40 +86,44 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1zE-LH-AHI">
                                 <rect key="frame" x="40" y="337" width="240" height="185"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7HL-PU-reY">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="130"/>
-                                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7HL-PU-reY">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="123"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Likes: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ag8-ux-4WP">
-                                        <rect key="frame" x="97" y="163" width="47" height="19"/>
+                                        <rect key="frame" x="97" y="166" width="47" height="19"/>
                                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="16"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ql-Q3-znt">
-                                        <rect key="frame" x="105" y="138" width="31" height="29"/>
+                                        <rect key="frame" x="106" y="138" width="29" height="16"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="16" id="O5d-io-Lf1"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
-                                        <state key="normal" title="more"/>
+                                        <state key="normal" backgroundImage="expand"/>
                                         <connections>
                                             <action selector="moreButtonTouchUpInside:" destination="ODl-HH-KuZ" eventType="touchUpInside" id="CzI-co-iFJ"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="7ql-Q3-znt" firstAttribute="top" secondItem="7HL-PU-reY" secondAttribute="bottom" constant="8" id="6Tt-em-Bnc"/>
+                                    <constraint firstItem="7ql-Q3-znt" firstAttribute="top" secondItem="7HL-PU-reY" secondAttribute="bottom" constant="15" id="5Zx-Zy-i3R"/>
                                     <constraint firstItem="7HL-PU-reY" firstAttribute="leading" secondItem="1zE-LH-AHI" secondAttribute="leading" id="CxT-ov-yb7"/>
                                     <constraint firstAttribute="height" constant="185" id="Q3o-SA-1P6"/>
-                                    <constraint firstItem="7ql-Q3-znt" firstAttribute="centerX" secondItem="1zE-LH-AHI" secondAttribute="centerX" id="Z0h-mM-REc"/>
                                     <constraint firstItem="7HL-PU-reY" firstAttribute="top" secondItem="1zE-LH-AHI" secondAttribute="top" id="aSv-BB-dyZ"/>
                                     <constraint firstItem="ag8-ux-4WP" firstAttribute="centerX" secondItem="1zE-LH-AHI" secondAttribute="centerX" constant="0.5" id="ai7-Wv-eq4"/>
-                                    <constraint firstAttribute="bottom" secondItem="7HL-PU-reY" secondAttribute="bottom" constant="55" id="bWF-EU-ab7"/>
+                                    <constraint firstAttribute="bottom" secondItem="7HL-PU-reY" secondAttribute="bottom" constant="62" id="bWF-EU-ab7"/>
                                     <constraint firstAttribute="width" constant="240" id="bgt-tP-4eK"/>
-                                    <constraint firstItem="ag8-ux-4WP" firstAttribute="top" secondItem="7ql-Q3-znt" secondAttribute="bottom" constant="-4" id="ee8-va-vTj"/>
+                                    <constraint firstItem="ag8-ux-4WP" firstAttribute="top" secondItem="7ql-Q3-znt" secondAttribute="bottom" constant="12" id="fH9-Zz-hco"/>
                                     <constraint firstAttribute="trailing" secondItem="7HL-PU-reY" secondAttribute="trailing" id="oXf-sf-yzk"/>
+                                    <constraint firstItem="7ql-Q3-znt" firstAttribute="centerX" secondItem="1zE-LH-AHI" secondAttribute="centerX" id="pDq-BT-e2y"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vdx-ls-9Qz">
@@ -140,9 +144,9 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BnZ-hm-NZG">
-                                <rect key="frame" x="137" y="153" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BnZ-hm-NZG">
+                                <rect key="frame" x="144" y="151" width="33" height="33"/>
+                                <state key="normal" backgroundImage="like"/>
                                 <connections>
                                     <action selector="likeButtonTouchUpInside:" destination="ODl-HH-KuZ" eventType="touchUpInside" id="z42-2f-PJ8"/>
                                 </connections>
@@ -161,7 +165,7 @@
                             <constraint firstItem="0EB-fR-oln" firstAttribute="top" secondItem="xE6-On-fOF" secondAttribute="bottom" constant="1" id="n0x-Ho-obR"/>
                             <constraint firstItem="hdY-hK-s2m" firstAttribute="centerX" secondItem="tFz-DS-9ge" secondAttribute="centerX" id="rCD-Wt-Krk"/>
                             <constraint firstItem="xE6-On-fOF" firstAttribute="top" secondItem="vdx-ls-9Qz" secondAttribute="bottom" constant="2" id="x8x-cP-kyi"/>
-                            <constraint firstItem="BnZ-hm-NZG" firstAttribute="centerX" secondItem="hdY-hK-s2m" secondAttribute="centerX" id="yuj-Sl-ghS"/>
+                            <constraint firstItem="BnZ-hm-NZG" firstAttribute="centerX" secondItem="hdY-hK-s2m" secondAttribute="centerX" constant="1" id="yuj-Sl-ghS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LTP-0b-dm6"/>
@@ -200,4 +204,8 @@
             <point key="canvasLocation" x="-571" y="264"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="expand" width="29" height="16"/>
+        <image name="like" width="33" height="33"/>
+    </resources>
 </document>

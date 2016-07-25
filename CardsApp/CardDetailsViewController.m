@@ -32,7 +32,8 @@
 
 @implementation CardDetailsViewController {
     BOOL needMore;
-    BOOL needLike;
+    BOOL didLike;
+    CGFloat defaultLabelHeight;
 }
 
 - (void)viewDidLoad {
@@ -41,6 +42,14 @@
     
     [self getUUID];
     [self showCard];
+}
+
+-(void)viewDidLayoutSubviews {
+    if ([self getLinesCountForLabel:self.descLabel] <= 5) {
+        self.moreButton.hidden = YES;
+        [self.descLabel sizeToFit];
+        self.descViewHeightConstraint.constant = self.descLabel.frame.size.height+55;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,8 +81,8 @@
     NSString *imageURLString = [kBackendlessRestApiDownloadFileURL stringByAppendingString:self.card.imageName];
     [self.cardImageVIew sd_setImageWithURL:[NSURL URLWithString:imageURLString]];
     
-    [self.likeButton setTitle:[self.card.likeUUIDList containsObject:self.UUID] ? @"Dislike" : @"Like" forState:UIControlStateNormal];
-    needLike = [self.likeButton.currentTitle isEqualToString:@"Like"] ? YES : NO;
+    didLike = [self.card.likeUUIDList containsObject:self.UUID] ? YES : NO;
+    [self.likeButton setBackgroundImage:didLike ? [UIImage imageNamed:@"dislike"] : [UIImage imageNamed:@"like"] forState:UIControlStateNormal];
     self.nameLabel.text = self.card.name;
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -82,25 +91,27 @@
     
     self.authorLabel.text = self.card.author;
     self.descLabel.text = self.card.info;
-    self.likesLabel.text = [NSString stringWithFormat:@"%@", self.card.likesCount];
+    self.likesLabel.text = [NSString stringWithFormat:@"Likes: %@", self.card.likesCount];
+    
     needMore = YES;
+    defaultLabelHeight = self.descLabel.frame.size.height;
 }
 
 - (IBAction)likeButtonTouchUpInside:(id)sender {
-    if (needLike) {
-        [self.likeButton setTitle:@"Dislike" forState:UIControlStateNormal];
+    didLike = !didLike;
+    if (didLike) {
+        [self.likeButton setBackgroundImage:[UIImage imageNamed:@"dislike"] forState:UIControlStateNormal];
         [self.card.likeUUIDList addObject:self.UUID];
         self.card.likesCount = [NSNumber numberWithInteger:self.card.likesCount.integerValue+1];
         self.likesLabel.text = [NSString stringWithFormat:@"Likes: %@", self.card.likesCount];
     } else {
-        [self.likeButton setTitle:@"Like" forState:UIControlStateNormal];
+        [self.likeButton setBackgroundImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
         [self.card.likeUUIDList removeObject:self.UUID];
         if (self.card.likesCount.integerValue > 0) {
             self.card.likesCount = [NSNumber numberWithInteger:self.card.likesCount.integerValue-1];
             self.likesLabel.text = [NSString stringWithFormat:@"Likes: %@", self.card.likesCount];
         }
     }
-    needLike = !needLike;
     
     [[CardsDataManager sharedManager] sendCardDataToServerWithId:self.card.objectId json:[self.card updatedFieldsJSON] completion:^(BOOL successful, NSString *error) {
         if (!successful) {
@@ -115,17 +126,39 @@
 
 - (IBAction)moreButtonTouchUpInside:(id)sender {
     if (needMore) {
-        self.descLabel.numberOfLines = 0;
+        [UIView animateWithDuration:1.5 animations:^{
+            [self.descLabel sizeToFit];
+        }];
+        [self.view layoutIfNeeded];
         self.descViewHeightConstraint.constant = self.descLabel.frame.size.height+55;
-        [self.descLabel sizeToFit];
-        [self.moreButton setTitle:@"Less" forState:UIControlStateNormal];
+        [UIView animateWithDuration:1.5 animations:^{
+            [self.view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            if (finished) {
+                [self.moreButton setBackgroundImage:[UIImage imageNamed:@"collapse"] forState:UIControlStateNormal];
+            }
+        }];
     } else {
-        self.descLabel.numberOfLines = 5;
-        [self.descLabel sizeToFit];
-        self.descViewHeightConstraint.constant = self.descLabel.frame.size.height+55;
-        [self.moreButton setTitle:@"More" forState:UIControlStateNormal];
+        [self.view layoutIfNeeded];
+        self.descViewHeightConstraint.constant = defaultLabelHeight+55;
+        [UIView animateWithDuration:1.5 animations:^{
+            [self.view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            if (finished) {
+                [self.moreButton setBackgroundImage:[UIImage imageNamed:@"expand"] forState:UIControlStateNormal];
+            }
+        }];
     }
     needMore = !needMore;
+}
+
+-(NSInteger)getLinesCountForLabel:(UILabel*)label {
+    NSInteger lineCount = 0;
+    CGSize textSize = CGSizeMake(label.frame.size.width, MAXFLOAT);
+    long rHeight = lroundf([label sizeThatFits:textSize].height);
+    long charSize = lroundf(label.font.lineHeight);
+    lineCount = rHeight/charSize;
+    return lineCount;
 }
 
 @end
