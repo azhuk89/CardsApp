@@ -23,29 +23,30 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="card name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QcV-y3-TPO">
-                                            <rect key="frame" x="8" y="14" width="76" height="21"/>
+                                            <rect key="frame" x="13" y="14" width="76" height="21"/>
                                             <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Like or not" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEj-gb-kWy">
-                                            <rect key="frame" x="190" y="14" width="82" height="21"/>
-                                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Ma-rJ-NbD">
+                                            <rect key="frame" x="240" y="11" width="23" height="27"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="23" id="5nY-of-QI4"/>
+                                                <constraint firstAttribute="height" constant="27" id="91V-WE-3Pe"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="QcV-y3-TPO" firstAttribute="top" secondItem="IRz-rZ-fNA" secondAttribute="topMargin" constant="6" id="3AM-Hp-FlW"/>
-                                        <constraint firstItem="cEj-gb-kWy" firstAttribute="top" secondItem="IRz-rZ-fNA" secondAttribute="topMargin" constant="6" id="ju3-Je-5Qa"/>
-                                        <constraint firstAttribute="leadingMargin" secondItem="QcV-y3-TPO" secondAttribute="leading" id="nwC-fE-akj"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="QcV-y3-TPO" secondAttribute="leading" constant="-5" id="nwC-fE-akj"/>
+                                        <constraint firstItem="3Ma-rJ-NbD" firstAttribute="centerY" secondItem="IRz-rZ-fNA" secondAttribute="centerY" constant="3" id="x69-im-FLU"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="cEj-gb-kWy" secondAttribute="trailing" constant="48" id="urf-sw-lnC"/>
+                                    <constraint firstAttribute="trailing" secondItem="3Ma-rJ-NbD" secondAttribute="trailing" constant="57" id="6IC-q5-SBx"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="likeLabel" destination="cEj-gb-kWy" id="VHM-bE-rQB"/>
+                                    <outlet property="likeStatusImage" destination="3Ma-rJ-NbD" id="BAa-SY-39Z"/>
                                     <outlet property="nameLabel" destination="QcV-y3-TPO" id="KJp-df-Zcv"/>
                                 </connections>
                             </tableViewCell>
@@ -88,7 +89,6 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7HL-PU-reY">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="123"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>

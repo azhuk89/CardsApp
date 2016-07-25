@@ -11,6 +11,6 @@
 @interface CardTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *likeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *likeStatusImage;
 
 @end

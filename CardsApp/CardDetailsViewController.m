@@ -9,6 +9,7 @@
 #import "CardDetailsViewController.h"
 #import "CardsDataManager.h"
 #import "Utils.h"
+#import "Constants.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface CardDetailsViewController ()
@@ -89,9 +90,9 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     self.dateLabel.text = [dateFormatter stringFromDate:self.card.created];
     
-    self.authorLabel.text = self.card.author;
+    self.authorLabel.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(AUTHOR_LABEL_PART, nil), self.card.author];
     self.descLabel.text = self.card.info;
-    self.likesLabel.text = [NSString stringWithFormat:@"Likes: %@", self.card.likesCount];
+    self.likesLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(LIKES_COUNT_LABEL_PART, nil), self.card.likesCount];
     
     needMore = YES;
     defaultLabelHeight = self.descLabel.frame.size.height;
@@ -103,19 +104,19 @@
         [self.likeButton setBackgroundImage:[UIImage imageNamed:@"dislike"] forState:UIControlStateNormal];
         [self.card.likeUUIDList addObject:self.UUID];
         self.card.likesCount = [NSNumber numberWithInteger:self.card.likesCount.integerValue+1];
-        self.likesLabel.text = [NSString stringWithFormat:@"Likes: %@", self.card.likesCount];
+        self.likesLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(LIKES_COUNT_LABEL_PART, nil), self.card.likesCount];
     } else {
         [self.likeButton setBackgroundImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
         [self.card.likeUUIDList removeObject:self.UUID];
         if (self.card.likesCount.integerValue > 0) {
             self.card.likesCount = [NSNumber numberWithInteger:self.card.likesCount.integerValue-1];
-            self.likesLabel.text = [NSString stringWithFormat:@"Likes: %@", self.card.likesCount];
+            self.likesLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(LIKES_COUNT_LABEL_PART, nil), self.card.likesCount];
         }
     }
     
     [[CardsDataManager sharedManager] sendCardDataToServerWithId:self.card.objectId json:[self.card updatedFieldsJSON] completion:^(BOOL successful, NSString *error) {
         if (!successful) {
-            [self presentViewController:[Utils showAlertWithTitle:@"Error" andMessage:@"Send Card Error"] animated:YES completion:nil];
+            [self presentViewController:[Utils showAlertWithTitle:SAVE_CARD_ERROR_ALERT_TITLE andMessage:SAVE_CARD_ERROR_ALERT_MESSAGE] animated:YES completion:nil];
         }
     }];
     

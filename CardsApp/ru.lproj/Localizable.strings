@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  CardsApp
+
+  Created by Alexandr Zhuk on 7/25/16.
+  Copyright © 2016 Alexandr Zhuk. All rights reserved.
+*/
+
+"LOAD_CARDS_ERROR_ALERT_TITLE" = "Ошибка загрузки карточек";
+"LOAD_CARDS_ERROR_ALERT_MESSAGE" = "Не удалось загрузить данных о карточках с сервера!";
+"SAVE_CARD_ERROR_ALERT_TITLE" = "Ошбика сохранения карточки";
+"LOAD_CARDS_ERROR_ALERT_MESSAGE" = "Не удалось сохранить измененные данные о карточке на сервере!";
+"LIKES_COUNT_LABEL_PART" = "Лайков";
+"AUTHOR_LABEL_PART" = "от";

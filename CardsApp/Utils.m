@@ -11,7 +11,7 @@
 @implementation Utils
 
 +(UIAlertController *)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:NSLocalizedString(title, nil) message:NSLocalizedString(message, nil) preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [alertVC dismissViewControllerAnimated:YES completion:nil];

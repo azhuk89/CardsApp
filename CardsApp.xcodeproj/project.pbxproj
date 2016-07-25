@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0419E6CE1D43714900457483 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0419E6CD1D43714900457483 /* Utils.m */; };
+		0419E6D31D4653D100457483 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0419E6D51D4653D100457483 /* Localizable.strings */; };
 		042AE0D71D40C98E0077394D /* CardsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042AE0D61D40C98E0077394D /* CardsTableViewController.m */; };
 		042AE0DC1D40C9F10077394D /* CardDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042AE0DB1D40C9F10077394D /* CardDetailsViewController.m */; };
 		042AE0DF1D40CA130077394D /* CardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042AE0DE1D40CA130077394D /* CardTableViewCell.m */; };
@@ -24,6 +25,10 @@
 /* Begin PBXFileReference section */
 		0419E6CC1D43714900457483 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		0419E6CD1D43714900457483 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		0419E6CF1D46531E00457483 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		0419E6D01D46531F00457483 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		0419E6D41D4653D100457483 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0419E6D61D4653D300457483 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		042AE0D51D40C98E0077394D /* CardsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardsTableViewController.h; sourceTree = "<group>"; };
 		042AE0D61D40C98E0077394D /* CardsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardsTableViewController.m; sourceTree = "<group>"; };
 		042AE0DA1D40C9F10077394D /* CardDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardDetailsViewController.h; sourceTree = "<group>"; };
@@ -141,6 +146,7 @@
 				042AE0E01D40CE240077394D /* Constants.h */,
 				0419E6CC1D43714900457483 /* Utils.h */,
 				0419E6CD1D43714900457483 /* Utils.m */,
+				0419E6D51D4653D100457483 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -206,6 +212,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 04B2AFA31D3FC1E100B0E26C;
 			productRefGroup = 04B2AFAD1D3FC1E400B0E26C /* Products */;
@@ -223,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04B2AFBF1D3FC1E900B0E26C /* LaunchScreen.storyboard in Resources */,
+				0419E6D31D4653D100457483 /* Localizable.strings in Resources */,
 				04B2AFBC1D3FC1E800B0E26C /* Assets.xcassets in Resources */,
 				04B2AFBA1D3FC1E800B0E26C /* Main.storyboard in Resources */,
 			);
@@ -297,10 +305,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		0419E6D51D4653D100457483 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0419E6D41D4653D100457483 /* en */,
+				0419E6D61D4653D300457483 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		04B2AFB81D3FC1E800B0E26C /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				04B2AFB91D3FC1E800B0E26C /* Base */,
+				0419E6CF1D46531E00457483 /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -309,6 +327,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				04B2AFBE1D3FC1E900B0E26C /* Base */,
+				0419E6D01D46531F00457483 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

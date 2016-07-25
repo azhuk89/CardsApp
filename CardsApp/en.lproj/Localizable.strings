@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  CardsApp
+
+  Created by Alexandr Zhuk on 7/25/16.
+  Copyright © 2016 Alexandr Zhuk. All rights reserved.
+*/
+
+"LOAD_CARDS_ERROR_ALERT_TITLE" = "Load Cards Error";
+"LOAD_CARDS_ERROR_ALERT_MESSAGE" = "Failed to load cards data from the server!";
+"SAVE_CARD_ERROR_ALERT_TITLE" = "Save Card Error";
+"LOAD_CARDS_ERROR_ALERT_MESSAGE" = "Failed to save card changes to the server!";
+"LIKES_COUNT_LABEL_PART" = "Likes";
+"AUTHOR_LABEL_PART" = "by";

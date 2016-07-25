@@ -59,7 +59,7 @@
     cell.nameLabel.text = card.name;
     
     NSString *UUID = [[NSUserDefaults standardUserDefaults] valueForKey:@"appUUID"];
-    cell.likeLabel.text = UUID && [card.likeUUIDList containsObject:UUID] ? @"I like!" : @"I do not like!";
+    cell.likeStatusImage.image = UUID && [card.likeUUIDList containsObject:UUID] ? [UIImage imageNamed:@"likeStatus"] : nil;
     
     return cell;
 }
@@ -128,7 +128,7 @@
                 }
                 [self.tableView reloadData];
             } else {
-                [self presentViewController:[Utils showAlertWithTitle:@"Error" andMessage:@"Load Cards Error"] animated:YES completion:nil];
+                [self presentViewController:[Utils showAlertWithTitle:LOAD_CARDS_ERROR_ALERT_TITLE andMessage:LOAD_CARDS_ERROR_ALERT_MESSAGE] animated:YES completion:nil];
             }
         });
     }];

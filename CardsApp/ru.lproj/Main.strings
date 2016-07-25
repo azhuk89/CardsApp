@@ -1,0 +1,24 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "0EB-fR-oln"; */
+"0EB-fR-oln.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "Cards List"; ObjectID = "54H-iX-vIk"; */
+"54H-iX-vIk.title" = "Список карточек";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "7HL-PU-reY"; */
+"7HL-PU-reY.text" = "Label";
+
+/* Class = "UILabel"; text = "card name"; ObjectID = "QcV-y3-TPO"; */
+"QcV-y3-TPO.text" = "card name";
+
+/* Class = "UILabel"; text = "Likes: 0"; ObjectID = "ag8-ux-4WP"; */
+"ag8-ux-4WP.text" = "Лайков: 0";
+
+/* Class = "UILabel"; text = "Like or not"; ObjectID = "cEj-gb-kWy"; */
+"cEj-gb-kWy.text" = "Like or not";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "vdx-ls-9Qz"; */
+"vdx-ls-9Qz.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "xE6-On-fOF"; */
+"xE6-On-fOF.text" = "Label";
