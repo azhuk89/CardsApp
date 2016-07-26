@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *desLabelBottomConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *descViewHeightConstraint;
@@ -35,6 +36,7 @@
     BOOL needMore;
     BOOL didLike;
     CGFloat defaultLabelHeight;
+    CGFloat oldOffset;
 }
 
 - (void)viewDidLoad {
@@ -56,6 +58,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 /*
@@ -130,10 +136,15 @@
         [UIView animateWithDuration:1.5 animations:^{
             [self.descLabel sizeToFit];
         }];
+        oldOffset = 0;
         [self.view layoutIfNeeded];
         self.descViewHeightConstraint.constant = self.descLabel.frame.size.height+55;
         [UIView animateWithDuration:1.5 animations:^{
             [self.view layoutIfNeeded];
+            if (self.scrollView.contentSize.height > self.scrollView.frame.size.height) {
+                oldOffset = self.scrollView.contentOffset.y;
+                [self.scrollView setContentOffset:CGPointMake(0, self.descLabel.frame.size.height+55)];
+            }
         } completion:^(BOOL finished) {
             if (finished) {
                 [self.moreButton setBackgroundImage:[UIImage imageNamed:@"collapse"] forState:UIControlStateNormal];
@@ -144,6 +155,9 @@
         self.descViewHeightConstraint.constant = defaultLabelHeight+55;
         [UIView animateWithDuration:1.5 animations:^{
             [self.view layoutIfNeeded];
+            if (oldOffset > 0) {
+                [self.scrollView setContentOffset:CGPointMake(0, oldOffset)];
+            }
         } completion:^(BOOL finished) {
             if (finished) {
                 [self.moreButton setBackgroundImage:[UIImage imageNamed:@"expand"] forState:UIControlStateNormal];
