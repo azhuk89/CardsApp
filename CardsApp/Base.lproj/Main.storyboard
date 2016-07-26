@@ -80,6 +80,10 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wK8-Xq-OJs">
                                 <rect key="frame" x="0.0" y="25" width="324" height="568"/>
                                 <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="QFp-X2-Rtr">
+                                        <rect key="frame" x="152" y="245" width="20" height="20"/>
+                                        <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </activityIndicatorView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hdY-hK-s2m">
                                         <rect key="frame" x="22" y="20" width="280" height="175"/>
                                         <constraints>
@@ -109,7 +113,6 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="xE6-On-fOF" firstAttribute="centerX" secondItem="1Nn-GI-rJ1" secondAttribute="centerX" id="C1B-eT-39I"/>
                                             <constraint firstItem="vdx-ls-9Qz" firstAttribute="centerX" secondItem="1Nn-GI-rJ1" secondAttribute="centerX" id="GF6-kH-UNk"/>
@@ -174,24 +177,35 @@
                                     <constraint firstItem="hdY-hK-s2m" firstAttribute="centerX" secondItem="wK8-Xq-OJs" secondAttribute="centerX" id="AKx-k2-MeS"/>
                                     <constraint firstItem="1zE-LH-AHI" firstAttribute="top" secondItem="1Nn-GI-rJ1" secondAttribute="bottom" constant="19" id="F6y-wk-Viv"/>
                                     <constraint firstItem="hdY-hK-s2m" firstAttribute="centerY" secondItem="BnZ-hm-NZG" secondAttribute="centerY" id="KaX-Dr-fvd"/>
+                                    <constraint firstItem="QFp-X2-Rtr" firstAttribute="centerX" secondItem="wK8-Xq-OJs" secondAttribute="centerX" id="LiA-G1-KLR"/>
                                     <constraint firstItem="1Nn-GI-rJ1" firstAttribute="top" secondItem="hdY-hK-s2m" secondAttribute="bottom" constant="8" id="SQ7-wW-bwR"/>
                                     <constraint firstItem="1Nn-GI-rJ1" firstAttribute="centerX" secondItem="BnZ-hm-NZG" secondAttribute="centerX" id="UTg-9I-a4C"/>
                                     <constraint firstItem="1zE-LH-AHI" firstAttribute="centerX" secondItem="wK8-Xq-OJs" secondAttribute="centerX" id="XKN-g2-OGy"/>
                                     <constraint firstAttribute="bottom" secondItem="1zE-LH-AHI" secondAttribute="bottom" constant="67" id="hxV-qj-5rv"/>
+                                    <constraint firstItem="QFp-X2-Rtr" firstAttribute="centerY" secondItem="wK8-Xq-OJs" secondAttribute="centerY" constant="-29" id="qjg-WO-ea6"/>
                                     <constraint firstItem="1Nn-GI-rJ1" firstAttribute="centerX" secondItem="wK8-Xq-OJs" secondAttribute="centerX" id="s4G-R4-1tr"/>
                                 </constraints>
                             </scrollView>
+                            <view hidden="YES" alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nrj-3h-VWQ">
+                                <rect key="frame" x="-4" y="0.0" width="328" height="568"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="nrj-3h-VWQ" firstAttribute="top" secondItem="Cpo-wa-4dD" secondAttribute="bottom" constant="-64" id="2SZ-TX-6Or"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wK8-Xq-OJs" secondAttribute="trailing" constant="-20" id="DFA-hR-eqX"/>
                             <constraint firstItem="wK8-Xq-OJs" firstAttribute="top" secondItem="tFz-DS-9ge" secondAttribute="top" constant="25" id="Fxp-SX-bJ7"/>
+                            <constraint firstItem="T1y-zy-lsh" firstAttribute="top" secondItem="nrj-3h-VWQ" secondAttribute="bottom" id="JcQ-9c-cvD"/>
+                            <constraint firstItem="nrj-3h-VWQ" firstAttribute="leading" secondItem="tFz-DS-9ge" secondAttribute="leadingMargin" constant="-20" id="SAl-Y2-6XQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nrj-3h-VWQ" secondAttribute="trailing" constant="-20" id="dGm-fB-1vN"/>
                             <constraint firstItem="wK8-Xq-OJs" firstAttribute="leading" secondItem="tFz-DS-9ge" secondAttribute="leading" id="jRJ-Jb-s84"/>
                             <constraint firstItem="wK8-Xq-OJs" firstAttribute="bottom" secondItem="T1y-zy-lsh" secondAttribute="top" constant="25" id="svb-yu-iUF"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LTP-0b-dm6"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="QFp-X2-Rtr" id="QWv-1v-uYE"/>
                         <outlet property="authorLabel" destination="xE6-On-fOF" id="dE4-dk-2g2"/>
                         <outlet property="cardImageVIew" destination="hdY-hK-s2m" id="Syz-Tl-nlt"/>
                         <outlet property="dateLabel" destination="0EB-fR-oln" id="tjp-tv-cdP"/>
@@ -201,6 +215,7 @@
                         <outlet property="descViewHeightConstraint" destination="ZHz-fR-nOr" id="6hy-h1-i10"/>
                         <outlet property="likeButton" destination="BnZ-hm-NZG" id="H5T-av-xTK"/>
                         <outlet property="likesLabel" destination="ag8-ux-4WP" id="qDv-7s-rTu"/>
+                        <outlet property="maskView" destination="nrj-3h-VWQ" id="lsu-J1-dZz"/>
                         <outlet property="moreButton" destination="7ql-Q3-znt" id="fZg-1I-Ilh"/>
                         <outlet property="nameLabel" destination="vdx-ls-9Qz" id="I9P-kM-3Et"/>
                         <outlet property="scrollView" destination="wK8-Xq-OJs" id="hLY-rv-c5D"/>

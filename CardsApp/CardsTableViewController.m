@@ -103,10 +103,6 @@
 }
 */
 
--(UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskAllButUpsideDown;
-}
-
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -116,7 +112,6 @@
         destinationVC.delegate = self;
     }
 }
-
 
 #pragma mark - load data logic
 

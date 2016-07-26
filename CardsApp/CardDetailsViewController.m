@@ -24,6 +24,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIView *maskView;
+
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *desLabelBottomConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *descViewHeightConstraint;
@@ -58,10 +61,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
--(UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 /*
@@ -120,10 +119,14 @@
         }
     }
     
+    [self.activityIndicator startAnimating];
+    self.maskView.hidden = NO;
     [[CardsDataManager sharedManager] sendCardDataToServerWithId:self.card.objectId json:[self.card updatedFieldsJSON] completion:^(BOOL successful, NSString *error) {
         if (!successful) {
             [self presentViewController:[Utils showAlertWithTitle:SAVE_CARD_ERROR_ALERT_TITLE andMessage:SAVE_CARD_ERROR_ALERT_MESSAGE] animated:YES completion:nil];
         }
+        [self.activityIndicator stopAnimating];
+        self.maskView.hidden = YES;
     }];
     
     if ([self.delegate respondsToSelector:@selector(cardDetailsViewControllerDidChangeLikeStatus)]) {
