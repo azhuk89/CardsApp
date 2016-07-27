@@ -7,10 +7,11 @@
 //
 
 #import "CardDetailsViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
 #import "CardsDataManager.h"
 #import "Utils.h"
 #import "Constants.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface CardDetailsViewController ()
 
@@ -26,7 +27,6 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UIView *maskView;
-
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *desLabelBottomConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *descViewHeightConstraint;
@@ -75,16 +75,16 @@
 
 -(void)getUUID {
     if (self.UUID) return;
-    self.UUID = [[NSUserDefaults standardUserDefaults] valueForKey:@"appUUID"];
+    self.UUID = [[NSUserDefaults standardUserDefaults] valueForKey:APP_UUID_USER_DEFAULTS_KEY];
     if (!self.UUID) {
         self.UUID = [[NSUUID UUID] UUIDString];
-        [[NSUserDefaults standardUserDefaults] setValue:self.UUID forKey:@"appUUID"];
+        [[NSUserDefaults standardUserDefaults] setValue:self.UUID forKey:APP_UUID_USER_DEFAULTS_KEY];
     }
     NSLog(@"%@", self.UUID);
 }
 
 -(void)showCard {
-    NSString *imageURLString = [kBackendlessRestApiDownloadFileURL stringByAppendingString:self.card.imageName];
+    NSString *imageURLString = [BACKENDLESS_REST_API_FILES_DOWNLOAD_URL stringByAppendingString:self.card.imageName];
     [self.cardImageVIew sd_setImageWithURL:[NSURL URLWithString:imageURLString]];
     
     didLike = [self.card.likeUUIDList containsObject:self.UUID] ? YES : NO;
@@ -121,7 +121,7 @@
     
     [self.activityIndicator startAnimating];
     self.maskView.hidden = NO;
-    [[CardsDataManager sharedManager] sendCardDataToServerWithId:self.card.objectId json:[self.card updatedFieldsJSON] completion:^(BOOL successful, NSString *error) {
+    [CardsDataManager sendCardDataToServerWithId:self.card.objectId json:[self.card updatedFieldsJSON] completion:^(BOOL successful, NSString *error) {
         if (!successful) {
             [self presentViewController:[Utils showAlertWithTitle:SAVE_CARD_ERROR_ALERT_TITLE andMessage:SAVE_CARD_ERROR_ALERT_MESSAGE] animated:YES completion:nil];
         }
@@ -171,11 +171,10 @@
 }
 
 -(NSInteger)getLinesCountForLabel:(UILabel*)label {
-    NSInteger lineCount = 0;
     CGSize textSize = CGSizeMake(label.frame.size.width, MAXFLOAT);
-    long rHeight = lroundf([label sizeThatFits:textSize].height);
-    long charSize = lroundf(label.font.lineHeight);
-    lineCount = rHeight/charSize;
+    long actuaLabelHeight = lroundf([label sizeThatFits:textSize].height);
+    long lineHeight = lroundf(label.font.lineHeight);
+    NSInteger lineCount = actuaLabelHeight/lineHeight;
     return lineCount;
 }
 

@@ -9,15 +9,19 @@
 #import "CardsTableViewController.h"
 #import "CardTableViewCell.h"
 #import "CardDetailsViewController.h"
+
 #import "Card.h"
+#import "CardsDataManager.h"
 
 #import "Constants.h"
 #import "Utils.h"
-#import "CardsDataManager.h"
+
+static NSString * const DETAILS_SEGUE_IDENTIFIER = @"detailsSegue";
+static NSString * const CARD_CELL_IDENTIFIER = @"Cell";
 
 @interface CardsTableViewController ()<CardDetailsViewControllerDelegate>
 
-@property (nonatomic) NSMutableArray *cards;
+@property (nonatomic) NSArray *cards;
 @property (nonatomic) Card *selectedCard;
 
 @end
@@ -53,12 +57,12 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    CardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CARD_CELL_IDENTIFIER forIndexPath:indexPath];
     
     Card *card = [self.cards objectAtIndex:indexPath.row];
     cell.nameLabel.text = card.name;
     
-    NSString *UUID = [[NSUserDefaults standardUserDefaults] valueForKey:@"appUUID"];
+    NSString *UUID = [[NSUserDefaults standardUserDefaults] valueForKey:APP_UUID_USER_DEFAULTS_KEY];
     cell.likeStatusImage.image = UUID && [card.likeUUIDList containsObject:UUID] ? [UIImage imageNamed:@"likeStatus"] : nil;
     
     return cell;
@@ -66,7 +70,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedCard = [self.cards objectAtIndex:indexPath.row];
-    [self performSegueWithIdentifier:@"detailsSegue" sender:self];
+    [self performSegueWithIdentifier:DETAILS_SEGUE_IDENTIFIER sender:self];
 }
 
 /*
@@ -106,7 +110,7 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"detailsSegue"]) {
+    if ([segue.identifier isEqualToString:DETAILS_SEGUE_IDENTIFIER]) {
         CardDetailsViewController *destinationVC = [segue destinationViewController];
         destinationVC.card = self.selectedCard;
         destinationVC.delegate = self;
@@ -116,14 +120,10 @@
 #pragma mark - load data logic
 
 -(void)loadCards {
-    [[CardsDataManager sharedManager] loadCardsDataWithCompletion:^(BOOL successful, NSArray *cardsJsonArray) {
+    [CardsDataManager loadCardsDataWithCompletion:^(BOOL successful, NSArray *cardsArray) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (successful) {
-                self.cards = [NSMutableArray new];
-                for (NSDictionary *json in cardsJsonArray) {
-                    Card *card = [[Card alloc] initWithJSON:json];
-                    [self.cards addObject:card];
-                }
+                self.cards = [NSArray arrayWithArray:cardsArray];
                 [self.tableView reloadData];
             } else {
                 [self presentViewController:[Utils showAlertWithTitle:LOAD_CARDS_ERROR_ALERT_TITLE andMessage:LOAD_CARDS_ERROR_ALERT_MESSAGE] animated:YES completion:nil];
